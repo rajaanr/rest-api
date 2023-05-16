@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     public function login()
@@ -80,17 +80,28 @@ class UserController extends Controller
     public function create(Request $request)
     {
        $validator =  Validator::make(request()->all(),[
-            'name' => 'required|unique:users',
-            'password' => 'required|min:6'
+            'id_card_number' => 'required',
+            'password' => 'required|min:6',
+            'name' => 'required',
+            'born_date' => 'required|date_format:Y-m-d',
+            'gender' => 'required',
+            'address' => 'required',
+            'regional_id' => 'required',
         ]);
 
         if ($validator->fails()) {
           return response()->json($validator->messages(),422);
         }
 
-        $user = new User();
-        $user->name = request('name');
+
+        $user = new Societies();
+        $user->id_card_number = request('id_card_number');
         $user->password = Hash::make(request('password'));
+        $user->name = request('name');
+        $user->born_date = request('born_date');
+        $user->gender = request('gender');
+        $user->address = request('address');
+        $user->regional_id = request('regional_id');
         $user->save();
 
         return response()->json('User Dibuat');
@@ -102,7 +113,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+///
     }
 
     /**
