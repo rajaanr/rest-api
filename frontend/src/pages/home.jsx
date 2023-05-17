@@ -1,45 +1,31 @@
-import { useContext } from "react";
-import Button from "../components/button/button";
-import FormControl from "../components/formLayouts/input";
-import AuthLayout from "../components/formLayouts/layout";
+import { useContext, useEffect } from "react";
+import Alert from "../components/alert/alert";
 import Navbar from "../components/navbar/navbar";
 import UserContext from "../utils/context";
 
 const HomePage = () => {
-  const { idCard, setIdCard, password, setPassword, loginHandler, validation } =
-    useContext(UserContext);
+  const { success } = useContext(UserContext);
 
+  useEffect(() => {
+    document.title = "Homepage";
+  }, []);
   return (
     <>
       <Navbar />
-      <div className="container mx-auto flex justify-center items-center h-screen">
-        <AuthLayout type="login" onSubmit={loginHandler}>
-          {validation.error && (
-            <span className="text-red-600">{validation.error}</span>
-          )}
-          <FormControl
-            onChange={(e) => setIdCard(e.target.value)}
-            value={idCard}
-            label="ID Card Number"
-          />
-          {validation.id_card_number && (
-            <small className="text-red-600">
-              {validation.id_card_number[0]}
-            </small>
-          )}
-          <FormControl
-            onChange={(e) => setPassword(e.target.value)}
-            label="Password"
-            value={password}
-            type="password"
-          />
-          {validation.password && (
-            <small className="text-red-600">{validation.password[0]}</small>
-          )}
-          <Button className="my-3 text-white" type="submit">
-            Login
-          </Button>
-        </AuthLayout>
+      <div className="container mx-auto flex flex-col px-8 justify-center h-[85vh]">
+        {success && <Alert>{success}</Alert>}
+
+        <div className="max-w-lg">
+          <h1 className="text-5xl shadow-black drop-shadow-xl text-sky-500 font-semibold py-4">
+            Vaccination
+          </h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere
+            accusantium cumque, esse iusto distinctio quasi at atque blanditiis
+            culpa corporis quos ducimus quaerat exercitationem possimus dicta
+            adipisci iste ipsam excepturi.
+          </p>
+        </div>
       </div>
     </>
   );

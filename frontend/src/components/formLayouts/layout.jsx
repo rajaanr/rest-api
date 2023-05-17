@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const AuthLayout = (props) => {
   const { type, children, onSubmit } = props;
   return (
-    <div className="max-w-xs border flex flex-col justify-center  border-slate-200 px-6 py-4 rounded-sm shadow-md ">
+    <div className="max-w-xs border flex flex-col justify-center  border-slate-200 px-6 py-4 rounded-md shadow-md ">
       <form action="" onSubmit={onSubmit}>
         <div className="py-6">
           <h1 className="text-2xl text-teal-400 py-2 font-semibold ">

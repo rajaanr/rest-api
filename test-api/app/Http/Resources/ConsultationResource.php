@@ -14,15 +14,6 @@ class ConsultationResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return  [
-            'consultations' => [
-            'id' => $this->id,
-            'status' => $this->status,
-            'disease_history' => $this->disease_history,
-            'current_symptomps' => $this->current_symptomps,
-            'doctor_notes' => $this->doctor_notes,
-            'doctor' => $this->doctor
-            ]
-        ];
+        return parent::toArray($request);
     }
 }

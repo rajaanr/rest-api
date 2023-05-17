@@ -15,16 +15,6 @@ class ConsultationController extends Controller
         $token = request()->header('Authorization');
         $user = Societies::where('societies.login_tokens', $token)->first();
 
-
-        $validator = Validator::make(request()->all(),[
-            'disease_history' => 'required',
-            'current_symptomps' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return response($validator->messages(),422);
-        }
-
         if (empty($token)) {
             return response()->json('Token is Missing');
         }
@@ -32,10 +22,11 @@ class ConsultationController extends Controller
             if ($user) {
                 $consul = new Consultation();
                 $consul->society_id = $user->id;
+                $consul->doctor_id = '1';
                 $consul->disease_history = request('disease_history');
                 $consul->current_symptomps = request('current_symptomps');
-                $consul->current_symptomps = request('current_symptomps');
                 $consul->status = 'accepted';
+                $consul->doctor_notes = 'ok';
                 $consul->save();
 
                 return response()->json('Successss');

@@ -6,6 +6,7 @@ const FormControl = (props) => {
         {label}
       </label>
       <input
+        autoComplete="off"
         id={label}
         type={type}
         className=" border-slate-500 border py-1 px-4 mt-2 mb-3 rounded-sm"
