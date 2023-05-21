@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\Validator;
 
 class ConsultationController extends Controller
 {
-    public function request(){
+    public function request($token){
 
-        $token = request()->header('Authorization');
         $user = Societies::where('societies.login_tokens', $token)->first();
 
         if (empty($token)) {
@@ -38,8 +37,7 @@ class ConsultationController extends Controller
     }
 
 
-    public function get() {
-        $token = request()->header('Authorization');
+    public function get($token) {
 
         $user = Societies::where('societies.login_tokens', $token)->first();
         if(empty($token)){

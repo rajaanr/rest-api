@@ -45,7 +45,7 @@ export const ContextProvider = ({ children }) => {
 
   const ifAuthenticated = () => {
     if (token) {
-      navigate("/*");
+      navigate(-1);
     }
   };
 

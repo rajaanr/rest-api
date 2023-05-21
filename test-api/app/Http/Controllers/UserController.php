@@ -57,10 +57,9 @@ class UserController extends Controller
     }
 
     //logout
-    public function logout(){
-       $header = request()->header('Authorization');
-        $user = Societies::where('societies.login_tokens', $header)->first();
-       if(empty($header)){
+    public function logout($token){
+        $user = Societies::where('societies.login_tokens', $token)->first();
+       if(empty($token)){
         return response()->json('Token Is Missing',402);
        }
        else {

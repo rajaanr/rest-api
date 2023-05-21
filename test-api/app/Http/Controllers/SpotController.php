@@ -9,8 +9,7 @@ use Illuminate\Http\Request;
 
 class SpotController extends Controller
 {
-    public function get(){
-        $token = request()->header('Authorization');
+    public function get($token){
 
         $user = Societies::where('societies.login_tokens', $token)->first();
         if(empty($token)){
@@ -25,5 +24,28 @@ class SpotController extends Controller
                 return response()->json('Invalid Tokens',401);
             }
         }
+    }
+
+    public function getById($id,$date,$token){
+
+        $user = Societies::where('societies.login_tokens', $token)->first();
+
+        if (!$user) {
+         return response()->json('Unauthorixed',401);
+        }
+        else {
+            $spot = Spot::findOrFail($id);
+
+            return response()->json([
+                'date' => date('F d,Y', strtotime($date)),
+                    'spot' => [
+                        'id' => $spot->id,
+                        'name' => $spot->name,
+                        'address' => $spot->address,
+                        'serve' => $spot->serve,
+                        'capacity' => $spot->capacity
+                    ] ]);
+        }
+
     }
 }
